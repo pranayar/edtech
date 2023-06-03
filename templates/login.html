@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-signup.css') }}">
+</head>
+<body>
+    <div class="wrapper login">
+        <div class="container">
+            <div class="col-left">
+                <div class="login-text">
+                    <h2>Welcome!</h2>
+                    <p>Login and start earning <br><br>
+                        Don't have an account? <a href="{{url_for('register')}}" style="text-decoration:underline;"><br>Click here to sign up</a>
+                </div>
+            </div>
+            <div class="col-right">
+                <div class="login-form">
+					<div class="msg" style="text-align:center">{{ msg }}</div>
+                    <h2 style="text-align:center">Login form</h2>
+                    <form action="{{ url_for('login') }}" method="post">
+						<p> <label>Email address/Mobile<span>*</span></label> <input name="username" type="text" placeholder="Enter your mobile or Email id" required> </p>
+						<p> <label>Password<span>*</span></label> <input name="password" type="password" placeholder="Password" required> </p>
+                        <p> <input type="submit" style="background:rgb(216, 232, 216)" value="Log In"> </p>
+                        <p> <a href="">Forgot password?</a> </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </script>
+</body>
+
+</html>

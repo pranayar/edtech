@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .error-code {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>An error occurred</h1>
+        <p>Some error occurred. You might not have chosen the file to submit.</p>
+        <p> Please try again or email us.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-signup.css') }}">
+</head>
+
+<body>
+    <div class="wrapper login">
+        <div class="container">
+            <div class="col-left">
+                <div class="login-text">
+                    <h2>Welcome!</h2>
+                    <p>Create your account and <br>start earning now!<br><br>
+                        Already have an account? <a href="{{url_for('login')}}" style="text-decoration:underline;"><br>Click here to log In</a>
+                </div>
+            </div>
+            <div class="col-right">
+                <div class="login-form">
+                    <div class="msg" style="text-align:center">{{ msg }}</div>
+                    <h2 style="text-align:center">Sign up form</h2>
+                    <form action="{{ url_for('register') }}" method="post">
+						<p> <label>Name<span>*</span></label> <input name="name" type="text" placeholder="Enter your name" required> </p>
+                        <p> <label>Email address<span>*</span></label> <input name="email" type="email" placeholder="Enter your Email id" required> </p>
+						<p> <label>Mobile Number<span>*</span></label> <input name="mobile" type="tel" placeholder="Enter mobile number" required> </p>
+						<p> <label>Password<span>*</span></label> <input name="password" type="password" placeholder="Password" required> </p>
+						<p> <label>Confirm Password<span>*</span></label> <input id="confirm-password" type="password" placeholder="Enter password again" required> </p>
+                        
+                        <p> <input type="submit" style="background:rgb(216, 232, 216)" value="Sign Up"> </p>
+                        <p> <a href="">Forgot password?</a> </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            var passwordInput = document.querySelector('input[type="password"]');
+            var confirmPasswordInput = document.getElementById('confirm-password');
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                e.preventDefault();
+                alert('Password and confirm password do not match.');
+            }
+        });
+		
+    </script>
+</body>
+
+</html>

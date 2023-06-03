@@ -1,0 +1,154 @@
+{% if session.loggedin %}
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Index </title>
+		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='style_index.css') }}">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   			
+	</head>
+
+	<body>
+		<div class="navbar">
+            <a onclick="window.location.href='/logout'">Log out</a> <a>Edit information</a><a>Welcome, {{ name }}</a>
+            
+          </div>
+		<h2 style="text-align:center"> Here are the list of available articles</h2>
+		<form action="{{ url_for('submit_article') }}" method="post" enctype="multipart/form-data"> 
+		<table style="margin:20px;">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Category</th>
+                    <th>Actions</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for row in data %}
+				{% if row['assigned']==0 %}
+				<tr>
+					<td>{{ row['title'] }}</td>
+					<td>{{ row['category'] }}</td>
+                    <td> <a href="#" id="reserveButton" data-article-id="{{ row['idarticles'] }}">Write</a>
+					  </td>
+					  <td></td>
+				</tr>
+
+				{% else %}
+				<input type="hidden" name="article_id" value="{{ row['idarticles'] }}">
+				<input type="hidden" name="user_id" value="{{ session.id }}">
+				<tr style="background-color: #e1fafa;">
+					<td>{{ row['title'] }}</td>
+					<td>{{ row['category'] }}</td>
+                    <td><input type="file" id="file" name="file">
+  					<input type="submit" id="submitButton">	
+					<td><button id="cancelbtn" type="button" class="cancelButton" data-article-id="{{ row['idarticles'] }}">Cancel</button></td>
+					  </td>
+				</tr>
+				{% endif %}
+				{% endfor %}
+				</tbody>
+		</table>
+	</form>
+		<div class="guidelines" style="margin:20px;">
+			<h2 style="text-align:center">Guidelines for Writing Articles</h2>
+			<ol>
+				<li><h3>AI tools like ChatGPT allowed</h3> ChatGPT and other AI tools can be used, but the content must be rephrased in your own words. The AI content detector <a
+					href="https://copyleaks.com/ai-content-detector" target="_blank">https://copyleaks.com/ai-content-detector</a> must classify the whole article as "HUMAN TEXT" with at least 50% probability.<br> No red lines or AI content detected should be shown on the detector.
+				</li>
+			<li><h3>Word Length</h3>The entire article should be a minimum of 950 words and can go up to approximately 1200 words.</li>
+			<li><h3>Code and Output</h3> Whenever codes are required, the output should be added in image form. Output should be attached with width 716px exactly and can be resized using any tool.</li>
+			<li><h3>Plagiarism</h3>The articles should not be plagiarized or copied from any source (online or offline). The plagiarism checker available at <a
+					href="https://smallseotools.com/plagiarism-checker/" target="_blank">https://smallseotools.com/plagiarism-checker/</a> must be used to check for plagiarism. The plagiarized amount should not exceed 4-7% in any case.</li>
+			<li><h3>Structure</h3>The articles should start with an <b>opening paragraph</b> that includes the topic of the article. A <b>conclusion</b> should be added at the end of the article, which should not be too big. It can summarize the topic and the entire article. You can refer to sample articles <br/>Sample 1: <a
+					href="https://drive.google.com/file/d/197yZm4Xe-skV7xPXOjWkDg0HsSgVCfsw/view?usp=sharing" target="_blank">https://drive.google.com/file/d/197yZm4Xe-skV7xPXOjWkDg0HsSgVCfsw/view?usp=sharing</a>.</li>
+
+					<br/>
+					Sample 2: <a
+					href="https://drive.google.com/file/d/1Eoi2wsfOHzhK-FilnZ87T8dSXBZr_HMd/view?usp=sharing" target="_blank">https://drive.google.com/file/d/1Eoi2wsfOHzhK-FilnZ87T8dSXBZr_HMd/view?usp=sharing</a>
+					
+					<li><h3>Unnecessary Data</h3> No unnecessary images or text anywhere
+					<li><h3>Payment</h3> 
+						Payment of <b>Rs 300</b> will be made.<br/>
+						All payments will be made on the 3rd of the next month, provided the articles are submitted by the 25th of the current month and meet the criteria of no plagiarism, word length, structure, AI content, etc. 
+						<br/>For example, if an article is submitted on the 18th of March, the payment will be made on the 1st of April. However, if the article is submitted after the 25th of March, it may be paid on the 1st of May.</li>
+
+					<li><h3>Payment method</h3>
+						You will be contacted on the registered mobile number before the month end for payment details. We support NEFT, UPI, Paytm etc.
+						Incase of any problems or delays please write to us at <a href="mailto:webmaster@example.com">webmaster@example.com</a></li>
+						<li><h3>Queries/Contact</h3> For any other questions or queries you can email us at <a href="mailto:webmaster@example.com">webmaster@example.com</a></li>
+					</ol>
+			<br>
+	
+		</div>
+	</body>
+	<script>
+		
+		$(document).on('click', '#reserveButton', function() {
+			var articleId = $(this).data('article-id');
+			
+			var dataToSend = {
+			  userId: '{{ session.id }}',
+			  articleId: articleId,
+			  
+			};
+			
+		  $.ajax({
+			url: '/reserve',
+			type: 'POST',
+			data: JSON.stringify(dataToSend),
+			contentType: 'application/json',
+			success: function(response) {
+			  // Handle the response from the Flask method
+			  var s=JSON.stringify(response);
+			  var x=s.indexOf("0")
+			  var y=s.lastIndexOf("0")
+			  var op=s.substring(x+1, y);
+			  alert(op);
+			  console.log(response);
+			  location.reload();
+			},
+			error: function(xhr, status, error) {
+			  // Handle error cases
+			  console.log(error);
+			}
+		  });
+		});
+
+		$(document).on('click', '#cancelbtn', function() {
+			var articleId = $(this).data('article-id');
+			
+			var dataToSend = {
+			  articleId: articleId,
+			};
+			
+		  $.ajax({
+			url: '/cancel_article',
+			type: 'POST',
+			data: JSON.stringify(dataToSend),
+			contentType: 'application/json',
+			success: function(response) {
+			  alert("Article cancelled");
+			  location.reload();
+			},
+			error: function(xhr, status, error) {
+			  // Handle error cases
+			  console.log(error);
+			}
+		  });
+		});
+
+		$(document).on('click', '#submitButton', function(e) {
+			var fileInput = $('#file');
+			if (fileInput[0].files.length === 0) {
+				e.preventDefault();
+				alert("Please attach a document before submitting.");
+			}
+		});
+	  </script>
+	  
+</html>
+{% endif %}
+

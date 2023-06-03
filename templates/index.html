@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Index </title>
+		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='style_index.css') }}">
+							
+	</head>
+
+	<body style="margin:20px; ">
+		<h2 style="text-align:center;"> Here are the list of available articles, Login/Sign up to write</h2>
+		<img class="typing-animation" style="display: block;
+		margin-left: auto;
+		margin-right: auto;" src="/static/animation.gif" height="200" width="40%" alt="Typing Animation">
+		<button class="btn-login" onclick="window.location.href='/redirect-login'" style="width:auto;">Login</button>
+		<button class="btn-signup" onclick="window.location.href='/redirect-signup'" style="width:auto;">Sign Up</button>
+	
+
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Category</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for row in data %}
+				<tr>
+					<td>{{ row['title'] }}</td>
+					<td>{{ row['category'] }}</td>
+
+				</tr>
+				{% endfor %}
+				
+			</tbody>
+		</table>
+		<div class="guidelines">
+			<h2 style="text-align:center">Guidelines for Writing Articles</h2>
+			<ol>
+				<li><h3>AI tools like ChatGPT allowed</h3> ChatGPT and other AI tools can be used, but the content must be rephrased in your own words. The AI content detector <a
+						href="https://copyleaks.com/ai-content-detector" target="_blank">https://copyleaks.com/ai-content-detector</a> must classify the whole article as "HUMAN TEXT" with at least 50% probability.<br> No red lines or AI content detected should be shown on the detector.
+					</li>
+				<li><h3>Word Length</h3>The entire article should be a minimum of 950 words and can go up to approximately 1200 words.</li>
+				<li><h3>Code and Output</h3> Whenever codes are required, the output should be added in image form. Output should be attached with width 716px exactly and can be resized using any tool.</li>
+				<li><h3>Plagiarism</h3>The articles should not be plagiarized or copied from any source (online or offline). The plagiarism checker available at <a
+						href="https://smallseotools.com/plagiarism-checker/" target="_blank">https://smallseotools.com/plagiarism-checker/</a> must be used to check for plagiarism. The plagiarized amount should not exceed 4-7% in any case.</li>
+				<li><h3>Structure</h3>The articles should start with an <b>opening paragraph</b> that includes the topic of the article. A <b>conclusion</b> should be added at the end of the article, which should not be too big. It can summarize the topic and the entire article. You can refer to sample articles <br/>Sample 1: <a
+						href="https://drive.google.com/file/d/197yZm4Xe-skV7xPXOjWkDg0HsSgVCfsw/view?usp=sharing" target="_blank">https://drive.google.com/file/d/197yZm4Xe-skV7xPXOjWkDg0HsSgVCfsw/view?usp=sharing</a>.</li>
+
+						<br/>
+						Sample 2: <a
+						href="https://drive.google.com/file/d/1Eoi2wsfOHzhK-FilnZ87T8dSXBZr_HMd/view?usp=sharing" target="_blank">https://drive.google.com/file/d/1Eoi2wsfOHzhK-FilnZ87T8dSXBZr_HMd/view?usp=sharing</a>
+						
+						<li><h3>Unnecessary Data</h3> No unnecessary images or text anywhere
+						<li><h3>Payment</h3> 
+							Payment of <b>Rs 300</b> will be made.<br/>
+							All payments will be made on the 3rd of the next month, provided the articles are submitted by the 25th of the current month and meet the criteria of no plagiarism, word length, structure, AI content, etc. 
+							<br/>For example, if an article is submitted on the 18th of March, the payment will be made on the 1st of April. However, if the article is submitted after the 25th of March, it may be paid on the 1st of May.</li>
+
+							<li><h3>Payment method</h3>
+								You will be contacted on the registered mobile number before the month end for payment details. We support NEFT, UPI, Paytm etc.
+								Incase of any problems or delays please write to us at <a href="mailto:webmaster@example.com">webmaster@example.com</a></li>
+								<li><h3>Queries/Contact</h3> For any other questions or queries you can email us at <a href="mailto:webmaster@example.com">webmaster@example.com</a></li>
+							</ol>
+			<br>
+			
+		</div>
+		
+	</body>
+</html>
