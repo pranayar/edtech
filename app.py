@@ -10,10 +10,12 @@ app = Flask(__name__)
 
 
 app.config['SECRET_KEY'] = 'super secret key'
-app.config['MYSQL_HOST'] = 'containers-us-west-67.railway.app'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'ucbqViOuL8XrvP9B4B6n'
-app.config['MYSQL_DB'] = 'railway'
+
+app.config['MYSQL_HOST'] = os.getenv('MYSQLHOST')
+app.config['MYSQL_PORT']=os.getenv('MYSQLPORT')
+app.config['MYSQL_USER'] = os.getenv('MYSQLUSER')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQLPASSWORD')
+app.config['MYSQL_DB'] = os.getenv('MYSQLDATABASE')
 app.config['SESSION_TYPE'] = 'filesystem'
 
 mysql = MySQL(app)
