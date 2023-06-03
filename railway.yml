@@ -1,0 +1,6 @@
+version: 1.0
+services:
+  main:
+    command: gunicorn app:app
+    env:
+      PORT: 8080
