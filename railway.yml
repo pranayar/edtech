@@ -1,6 +1,6 @@
 version: 1.0
 services:
   main:
-    command: gunicorn app:app
+    command: flask run
     env:
       PORT: 8080
