@@ -1,6 +1,0 @@
-version: 1.0
-services:
-  main:
-    command: flask run
-    env:
-      PORT: 8080
